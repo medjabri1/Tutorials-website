@@ -326,7 +326,7 @@ html, body {
   color: #30445c;
   letter-spacing: 1px;
   word-spacing: 4px;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   text-transform: uppercase;
 }
 
@@ -355,7 +355,7 @@ html, body {
 }
 
 .container .signBloc .signIn input, .container .signBloc .signUp input {
-  font-size: 1rem;
+  font-size: .9rem;
   padding: 8px;
   border-radius: 10px;
   border: none;
@@ -363,7 +363,7 @@ html, body {
   -webkit-box-shadow: 0px 0px 2px #30445c22, 0px 0px 7px #30445c22;
           box-shadow: 0px 0px 2px #30445c22, 0px 0px 7px #30445c22;
   margin: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   width: 100%;
   max-width: 230px;
   color: #14868a;
@@ -406,5 +406,118 @@ html, body {
 .container .signBloc .signIn input[type='submit']:active, .container .signBloc .signUp input[type='submit']:active {
   -webkit-transform: scale(1.03);
           transform: scale(1.03);
+}
+
+.container .signBloc .errors {
+  width: 350px;
+  height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  padding: 30px;
+}
+
+.container .signBloc .errors .icon {
+  height: 45%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.container .signBloc .errors .errorText {
+  margin-top: 5%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f02828;
+  text-align: center;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: #30445cAA;
+  z-index: 10000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+  -webkit-transform: scale(0.5) translateY(-100%);
+          transform: scale(0.5) translateY(-100%);
+  opacity: 0;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+}
+
+.modal.active {
+  -webkit-transform: scale(1) translateY(0);
+          transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.modal .close {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  height: 25px;
+  cursor: pointer;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  -webkit-transition-property: -webkit-transform, -webkit-filter;
+  transition-property: -webkit-transform, -webkit-filter;
+  transition-property: transform, filter;
+  transition-property: transform, filter, -webkit-transform, -webkit-filter;
+}
+
+.modal .close:hover {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  -webkit-filter: invert(0.95);
+          filter: invert(0.95);
+}
+
+.modal .content {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: #FFF;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 2px #00000044, 0px 0px 7px #00000044, 0px 0px 10px #00000044, 0px 0px 15px #00000044;
+          box-shadow: 0px 0px 2px #00000044, 0px 0px 7px #00000044, 0px 0px 10px #00000044, 0px 0px 15px #00000044;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=index.css.map */
