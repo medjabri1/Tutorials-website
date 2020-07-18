@@ -1,26 +1,30 @@
 <?php
 
+    spl_autoload_register(function ($class_name) {
+        include './'. $class_name . '.php';
+    });
+
     class Model {
 
-        protected static function findBy($value, $column, $table_name) {
+        protected static function getBy($value, $column = "", $table_name = "") {
 
             $conn = Database::getConnection();
-            $query = "select distinct * from ". $table_name ." where $column = '$value'";
+            $query = "select * from ". $table_name ." where $column = '$value'";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $data = $stmt->fetchAll();
 
-            return count($data) ? $data[0] : null;
+            return $data;
         }
 
-        protected static function findAll($table_name) {
+        protected static function getAll($table_name = "") {
             $conn = Database::getConnection();
             $query = "select * from ". $table_name ." order by created_at desc";
             $stmt = $conn->prepare($query);
             $stmt->execute();
             $data = $stmt->fetchAll();
 
-            return count($data) ? $data : null;
+            return $data;
         }
 
         public static function submitData($query, $params) : bool {

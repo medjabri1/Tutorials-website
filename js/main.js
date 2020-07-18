@@ -81,7 +81,23 @@ signIn.addEventListener('submit', (e) => {
 
     } else {
 
-        //Everything is okay
+        let loader = document.querySelector('.loader').parentElement.parentElement;
+        loader.classList.add('active');
+
+        setTimeout(() => {
+            
+            loader.classList.remove('active');
+
+            loader.addEventListener('transitionend', () => {
+
+                let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
+                modal.classList.add('active');
+                modal.querySelector('.errorText').innerHTML = "- Wrong password";
+            })
+
+
+        }, 3000);
+
     }
 
 })
@@ -124,7 +140,23 @@ signUp.addEventListener('submit', (e) => {
 
     } else {
 
-        //Everything is okay
+        let loader = document.querySelector('.loader').parentElement.parentElement;
+        loader.classList.add('active');
+
+        setTimeout(() => {
+            
+            loader.classList.remove('active');
+
+            loader.addEventListener('transitionend', () => {
+
+                let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
+                modal.classList.add('active');
+                modal.querySelector('.errorText').innerHTML = "- Email already taken by another account";
+            })
+
+
+        }, 3000);
+
     }
 
 })
@@ -133,6 +165,14 @@ signUp.addEventListener('submit', (e) => {
 //Close modals by clicking on button or esc key
 
 let closeModals = () => {
+    document.querySelectorAll('.modal').forEach(modal => {
+        if(modal.querySelector('.loader') == null) {
+            modal.classList.remove('active');
+        }
+    })
+};
+
+let closeModalsLoaders = () => {
     document.querySelectorAll('.modal').forEach(modal => {
         modal.classList.remove('active');
     })

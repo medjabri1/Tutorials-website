@@ -8,6 +8,17 @@
     <link rel="shortcut icon" href="./imgs/icon.png" type="image/x-icon">
 </head>
 <body>
+
+    <div class="modal">
+        <div class="content">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
 
         <div class="background">
