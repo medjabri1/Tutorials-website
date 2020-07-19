@@ -50,7 +50,7 @@
 
         //User registered
         echo json_encode([
-            'code' => '200',
+            'code' => '004',
             'result' => 'Signed up successfully',
             'cause' => '',
             'developer' => 'MJR',

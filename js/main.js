@@ -106,13 +106,11 @@ signIn.addEventListener('submit', (e) => {
 
                         loader.addEventListener('transitionend', () => {
 
-                            let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
-                            modal.classList.add('active');
-                            modal.querySelector('.errorText').innerHTML = '- '+ result;
+                            window.location.replace('./test.php');
                         })
 
 
-                    }, 1000);
+                    }, 2000);
 
                 } else {
 
@@ -139,20 +137,6 @@ signIn.addEventListener('submit', (e) => {
         xhr.open("POST", WEBSITE_ADDRESS + "api/user/signin.php" );
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send('user_email='+ email +'&user_password='+ password); 
-
-        // setTimeout(() => {
-            
-        //     loader.classList.remove('active');
-
-        //     loader.addEventListener('transitionend', () => {
-
-        //         let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
-        //         modal.classList.add('active');
-        //         modal.querySelector('.errorText').innerHTML = "- Wrong password";
-        //     })
-
-
-        // }, 3000);
 
     }
 
@@ -199,19 +183,57 @@ signUp.addEventListener('submit', (e) => {
         let loader = document.querySelector('.loader').parentElement.parentElement;
         loader.classList.add('active');
 
-        setTimeout(() => {
-            
-            loader.classList.remove('active');
+        const xhr = new XMLHttpRequest();
+        
+        xhr.onreadystatechange = () => {
 
-            loader.addEventListener('transitionend', () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
 
-                let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
-                modal.classList.add('active');
-                modal.querySelector('.errorText').innerHTML = "- Email already taken by another account";
-            })
+                let data = JSON.parse(xhr.responseText);
+                
+                let code = data['code'];
+                let result = data['result'];
+
+                if(code == '004') {
+
+                    //User registered
+                    setTimeout(() => {
+                        
+                        loader.classList.remove('active');
+
+                        loader.addEventListener('transitionend', () => {
+
+                            window.location.replace('./test.php');
+                        })
 
 
-        }, 3000);
+                    }, 2000);
+
+                } else {
+
+                    setTimeout(() => {
+                        
+                        loader.classList.remove('active');
+
+                        loader.addEventListener('transitionend', () => {
+
+                            let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
+                            modal.classList.add('active');
+                            modal.querySelector('.errorText').innerHTML = '- '+ result;
+                        })
+
+
+                    }, 1000);
+
+                }
+
+                
+            }
+        }
+
+        xhr.open("POST", WEBSITE_ADDRESS + "api/user/signup.php" );
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send('user_name='+ name +'&user_email='+ email +'&user_password='+ password); 
 
     }
 
