@@ -108,14 +108,14 @@
 
         //ADD User --------------
 
-        public function addUser() : bool {
+        public static function addUser(User $user) : bool {
 
             $query = 'insert into '. self::$TABLE_NAME .' values ( null, ?, ?, ?, ?, null, null )';
             $params = [
-                $this->name,
-                $this->email,
-                $this->password,
-                $this->image
+                $user->name,
+                $user->email,
+                $user->password,
+                $user->image
             ];
 
             return Model::submitData($query, $params);

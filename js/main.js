@@ -1,3 +1,5 @@
+const WEBSITE_ADDRESS = "http://localhost/tutorialsWebsite/";
+
 let signBloc = document.querySelector('.signBloc');
 
 let signIn = signBloc.querySelector('.signIn');
@@ -84,19 +86,73 @@ signIn.addEventListener('submit', (e) => {
         let loader = document.querySelector('.loader').parentElement.parentElement;
         loader.classList.add('active');
 
-        setTimeout(() => {
+        const xhr = new XMLHttpRequest();
+        
+        xhr.onreadystatechange = () => {
+
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                let data = JSON.parse(xhr.responseText);
+                
+                let code = data['code'];
+                let result = data['result'];
+
+                if(code == '003') {
+
+                    //User logged in
+                    setTimeout(() => {
+                        
+                        loader.classList.remove('active');
+
+                        loader.addEventListener('transitionend', () => {
+
+                            let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
+                            modal.classList.add('active');
+                            modal.querySelector('.errorText').innerHTML = '- '+ result;
+                        })
+
+
+                    }, 1000);
+
+                } else {
+
+                    setTimeout(() => {
+                        
+                        loader.classList.remove('active');
+
+                        loader.addEventListener('transitionend', () => {
+
+                            let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
+                            modal.classList.add('active');
+                            modal.querySelector('.errorText').innerHTML = '- '+ result;
+                        })
+
+
+                    }, 1000);
+
+                }
+
+                
+            }
+        }
+
+        xhr.open("POST", WEBSITE_ADDRESS + "api/user/signin.php" );
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send('user_email='+ email +'&user_password='+ password); 
+
+        // setTimeout(() => {
             
-            loader.classList.remove('active');
+        //     loader.classList.remove('active');
 
-            loader.addEventListener('transitionend', () => {
+        //     loader.addEventListener('transitionend', () => {
 
-                let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
-                modal.classList.add('active');
-                modal.querySelector('.errorText').innerHTML = "- Wrong password";
-            })
+        //         let modal = signBloc.querySelector('.modal .errors').parentElement.parentElement;
+        //         modal.classList.add('active');
+        //         modal.querySelector('.errorText').innerHTML = "- Wrong password";
+        //     })
 
 
-        }, 3000);
+        // }, 3000);
 
     }
 
