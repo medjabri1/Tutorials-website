@@ -35,13 +35,13 @@ let switchSignBloc = () => {
     if(signIn.classList.contains('active')) {
         signIn.classList.remove('active')
         signUp.classList.add('active');
+        signIn.reset();
     } else {
         signIn.classList.add('active');
         signUp.classList.remove('active');
+        signUp.reset();
     }
 
-    signIn.reset();
-    signUp.reset();
 
     if(signSwitch.classList.contains('active')) {
         signSwitch.classList.remove('active');
@@ -106,7 +106,7 @@ signIn.addEventListener('submit', (e) => {
 
                         loader.addEventListener('transitionend', () => {
 
-                            window.location.replace('./test.php');
+                            window.location.replace('./home.php');
                         })
 
 
@@ -200,10 +200,14 @@ signUp.addEventListener('submit', (e) => {
                     setTimeout(() => {
                         
                         loader.classList.remove('active');
+                        switchSignBloc();
 
                         loader.addEventListener('transitionend', () => {
 
-                            window.location.replace('./test.php');
+                            let modal = document.querySelector('.modal .success').parentElement.parentElement;
+                            modal.classList.add('active');
+                            modal.querySelector('.message').innerHTML = '- You are registered successfully, check your email for verification';
+
                         })
 
 

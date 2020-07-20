@@ -141,6 +141,52 @@
 
         }
 
+        //SEND VERIFICATION EMAIL -------------
+        
+        public function sendVerificationEmail() : bool {
+
+            $WEBSITE_ADRESS = 'http://localhost/tutorialswebsite';
+
+            $id = $this->id;
+            $email = $this->email;
+            $token = sha1($this->created_at);
+            
+            $subject = 'TUTORIALS WEBSITE : Verify your registration';
+            $message = "
+                <h2>Email Validation :</h2>
+                <p><b>We did have your request to join us tutorials website team<b></p>
+                <hr>
+                <p>to complete your process visit this link below</p>
+                <p><a href='$WEBSITE_ADRESS/api/user/verify-email.php?id=$id&email=$email&token=$token'>Sign up after Clicking here</a></p>
+                <br><hr><br>
+                <p>This message was sended automatically please don't reply!</p>";
+
+            //from w3schools
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // More headers
+            $headers .= 'From: <tutorials@newsletter.com>' . "\r\n";
+
+            if(mail($email, $subject, $message, $headers))
+                //Email sent
+                return true;
+            else
+                return false;
+
+        }
+
+        //VERIFY EMAIL -----------------
+
+        public function verifyEmail() {
+
+            $query = 'update '. self::$TABLE_NAME .' set verified_at = current_timestamp where id = ?';
+            $params = [ $this->id ];
+
+            return Model::submitData($query, $params);
+
+        }
+
     }
 
 ?>

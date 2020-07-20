@@ -57,6 +57,9 @@
             'github' => 'https://github.com/medjabri1/TutorialsWebsite',
             'version' => '1.0'
         ]);
+
+        User::getBy($user->getEmail(), 'email')->sendVerificationEmail();
+
         die();
 
     } else {

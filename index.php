@@ -1,3 +1,15 @@
+<?php
+
+    session_start();
+    if(isset($_SESSION['user_id'])) {
+
+        //Already logged in
+        header('Location: /tutorialswebsite/home.php');
+
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +27,20 @@
                 <span></span>
                 <span></span>
                 <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="content">
+
+            <img src="./imgs/cancel.png" alt="Close button" class="close">
+
+            <div class="success">
+
+                <img src="./imgs/success.png" alt="Success icon" class="icon">
+                <span class="message"></span>
+
             </div>
         </div>
     </div>
